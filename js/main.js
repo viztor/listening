@@ -13,6 +13,7 @@ $(document).ready(function(){
 			listStatus = 0;
 		}	
 	})
+    console.log(playlist)
 	//console.log(localStorage.currentMusic + '-' + localStorage.repeat + '-' + localStorage.quality);
 	//���ر������ݣ������еĻ���
 	if(typeof(localStorage.repeat) == undefined || isNaN(localStorage.repeat))
@@ -46,7 +47,7 @@ $(document).ready(function(){
 	//���ز����б�
 	for (var i = 0; i < playlist.length; i++){
 		var item = playlist[i];
-		$('.play-list ul').append('<li class="item' + i + '">' + item.title + '</li>');
+		$('.play-list ul').append('<li class="item' + i + '">' + item + '</li>');
 	}    
 	
 	/**
@@ -64,44 +65,25 @@ $(document).ready(function(){
 		currentMusic = localStorage.currentMusic = i;
 		var item = playlist[i];
 
-		$.ajax({
-			type: "POST",
-			cache: false,
-		    dataType: 'jsonp',
-		    jsonp: 'callback',
-		    async: false,
-		    url: 'http://er.fantuanpu.com/xiami.php?id=' + item.id + '&type=song&callback=?',
-		    success: function(data) {
 				//ѡ����ͬ�����������ļ�
-		    	if(!quality){
-					src = item.mp3_h;
-				} else {
-					src = data.song_src;
-				}
-				src = data.song_src;
+					src = 'res/'+ item + '.mp3' ;
+        console.log(src)
 				//���ظ��ֶ���
 				audio.setAttribute("src", src);
 				audio.addEventListener('play', playEvent, false);
 				audio.addEventListener('pause', stopEvent, false);
 				audio.addEventListener('timeupdate', updateProgress, false);
 				audio.addEventListener('ended', autoChange, false);
-				cover = data.song_cover;
-				cover = cover.replace('_1','_4');
-				cover = cover.replace('_2','_4');
-				cover = cover.replace('_3','_4');
-				cover = cover.replace('_4','_4');
-				cover = cover;
-				if(!cover)
 					cover = 'img/album.jpg';
-				$('.album img').attr({'src': cover, 'alt': item.artist});
-				$('#wrap .title h1').html(item.title);
-				$('#wrap .title h2').html(item.artist);
+				$('.album img').attr({'src': cover, 'alt': '英语听力'});
+				$('#wrap .title h1').html(item);
+				$('#wrap .title h2').html('英语听力');
 				$('.play-list ul li').removeClass('playing').eq(i).addClass('playing');
 				
 				audio.play();
 
 				if(window.webkitNotifications && window.webkitNotifications.checkPermission() == 0){
-					var information = window.webkitNotifications.createNotification(cover, item.title, item.artist);
+					var information = window.webkitNotifications.createNotification(cover, item, "英语听力");
 					information.onclick = function(){
 						window.focus();
 						information.cancel();
@@ -109,9 +91,8 @@ $(document).ready(function(){
 					information.show(); 
 					setTimeout(function(){information.cancel()},2000);
 				}
-				console.log('Song Title: ' + item.title + ' Song Artist: ' + item.artist);
-		    },
-		});	
+				console.log('Current Playing: ' + item);
+
 	}
 	loadMusic(currentMusic);
 	
@@ -259,6 +240,6 @@ $(document).ready(function(){
 	)
 	
 	$('.home').click(function(){
-		window.open('http://www.dsu.pw');
+		window.open('http://viztor.me');
 	})
 })
