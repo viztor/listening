@@ -63,7 +63,7 @@ body:hover #wrap .play-list, body:hover #wrap .control, body:hover #wrap .inicie
 }
 
 
-#wrap .control i,#wrap .iniciel i {
+#wrap .control i, #wrap .iniciel i {
 	background: rgba(0,0,0,0.2);
 	padding: 20px;
 	width: 60px;
@@ -72,7 +72,7 @@ body:hover #wrap .play-list, body:hover #wrap .control, body:hover #wrap .inicie
 	font-size: 2em;
 	border-radius: 50%;
 }
-#wrap .control i:hover,#wrap .iniciel i:hover {
+#wrap .control i:hover, #wrap .iniciel i:hover {
 	background: rgba(0,0,0,0.4);
 	color: rgba(255,255,255,1);
 	cursor: pointer;
@@ -155,10 +155,10 @@ body:hover #wrap .play-list, body:hover #wrap .control, body:hover #wrap .inicie
 }
 @media screen and (max-width: 768px) {
 	#wrap .play-list ul { 
-		font-size: 1.6em;	
+		font-size: 1.5em;	
 	}
 	#wrap .play-list ul li {
-		padding: 15px 10px;
+		padding: 20px 20px;
 	}
 }
 #wrap .album { 
@@ -204,11 +204,8 @@ to{transform: rotate(359deg)}
     box-shadow:0 0 15px 0px rgba(0, 0, 0, 0.7);
     
 }
-@media screen and (max-width: 992px) { 
-  #wrap .album img{
-		width: 75%;
-		height: 75%;
-	}
+
+
 }
 @media screen and (max-width: 768px) {
 	#wrap .album img{
