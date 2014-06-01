@@ -18,8 +18,6 @@ $(document).ready(function(){
 	//���ر������ݣ������еĻ���
 	if(typeof(localStorage.repeat) == undefined || isNaN(localStorage.repeat))
 		localStorage.repeat = '0';
-	if(typeof(localStorage.quality) == undefined || isNaN(localStorage.quality))
-		localStorage.quality = '0';
 	if(typeof(localStorage.prevplay) == undefined || isNaN(localStorage.prevplay))
 		localStorage.prevplay = '-1';
 	if(typeof(localStorage.prevplay) == currentMusic || isNaN(localStorage.currentMusic) || !playlist[localStorage.currentMusic])
@@ -35,14 +33,9 @@ $(document).ready(function(){
 	var retitle = ['Random', 'Cycle', 'Order'];
 
 	//����״̬�޸�ͼ��
-	if(!quality){
-		$('.control .quality i').removeClass('fa-star').addClass('fa-star-half').attr('title','Normal Quality'); 
-	} else {
-		$('.control .quality i').removeClass('fa-star-half').addClass('fa-star').attr('title','High Quality'); 
-	}
-	$('.control .repeat i').removeClass().addClass('fa').addClass(relist[repeat]).attr('title',retitle[repeat]); 
+	$('.repeat i').removeClass().addClass('fa').addClass(relist[repeat]).attr('title',retitle[repeat]); 
 
-	console.log('Current Music: ' + currentMusic + ' Repeat: '+ repeat + ' Quality: '+ quality);
+	console.log('Current Playing: ' + currentMusic + ' Repeat: '+ repeat );
 
 	//���ز����б�
 	for (var i = 0; i < playlist.length; i++){
@@ -71,13 +64,15 @@ $(document).ready(function(){
         audio.addEventListener('pause', stopEvent, false);
         audio.addEventListener('timeupdate', updateProgress, false);
         audio.addEventListener('ended', autoChange, false);
+        $('.progress').on('click',,function(){})
         cover = 'img/album.jpg';
         $('.album img').attr({'src': cover, 'alt': '英语听力'});
         $('#wrap .title h1').html(item);
         $('#wrap .title h2').html('英语听力');
         $('.play-list ul li').removeClass('playing').eq(i).addClass('playing');
         audio.play();
-        
+    
+    //Web Notification
         if(window.webkitNotifications && window.webkitNotifications.checkPermission() == 0){
             var information = window.webkitNotifications.createNotification(cover, item, "英语听力");
             information.onclick = function(){
@@ -89,6 +84,7 @@ $(document).ready(function(){
         }
         console.log('Current Listening: ' + item);
 	}
+    
 	loadMusic(currentMusic);
 	
 	var changeMusic = function(i){
@@ -127,6 +123,9 @@ $(document).ready(function(){
 	var updateProgress = function(){
 		$('#wrap .progress .current').css({'width': audio.currentTime / audio.duration * 100 + '%'});
 	}
+    var setProgress = function(){
+    
+    }
 	
 	var playEvent = function(){
 		$('.album').addClass('playing');
@@ -154,7 +153,7 @@ $(document).ready(function(){
 		}
 	});
 
-	$('.control .pre').click(function(){
+	$('.pre').click(function(){
 		audio.pause();
 		if((currentMusic * 1 + 1) != localStorage.prevplay && localStorage.prevplay > -1){
 			changeMusic(localStorage.prevplay);
@@ -165,7 +164,7 @@ $(document).ready(function(){
 		}
 	})
 
-	$('.control .next').click(function(){
+	$('.next').click(function(){
 		audio.pause();
 		if(localStorage.repeat == 0){
 			nextMusic = randomNum(0, playlist.length); 
@@ -189,26 +188,17 @@ $(document).ready(function(){
 		}
 	})
 
-	$('.control .repeat').click(function(){
+	$('.repeat').click(function(){
 		console.log('repeat ' + repeat);
 		if(repeat == 2){
-			$('.control .repeat i').removeClass(relist[repeat]).addClass(relist[0]).attr('title',retitle[0]); 
+			$('.repeat i').removeClass(relist[repeat]).addClass(relist[0]).attr('title',retitle[0]); 
 			repeat = localStorage.repeat = 0;
 		} else {
-			$('.control .repeat i').removeClass(relist[repeat]).addClass(relist[repeat + 1]).attr('title',retitle[repeat + 1]); 
+			$('.repeat i').removeClass(relist[repeat]).addClass(relist[repeat + 1]).attr('title',retitle[repeat + 1]); 
 			repeat = localStorage.repeat = repeat + 1;
 		}	
 	})
 	
-	$('.control .quality').click(function(){
-		if(quality){
-			$('.control .quality i').removeClass('fa-star').addClass('fa-star-half').attr('title','Normal Quality'); 
-			quality = localStorage.quality = 0;
-		} else {
-			$('.control .quality i').removeClass('fa-star-half').addClass('fa-star').attr('title','High Quality'); 
-			quality = localStorage.quality = 1;
-		}	
-	})
 	
 	$('.player').click(function(){
 		if(listStatus){
@@ -217,22 +207,6 @@ $(document).ready(function(){
 		listStatus = 0;
 		}
 	})
-	
-	$('.setting').click(function(){
-		
-	})
-	
-	$('.iniciel_control').click(function(){
-			if($('.iniciel_control i').hasClass('fa-plus')){
-				$('.iniciel_control i').removeClass('fa-plus');
-				$('.iniciel_control i').addClass('fa-minus');
-			} else {
-				$('.iniciel_control i').removeClass('fa-minus');
-				$('.iniciel_control i').addClass('fa-plus');
-			}
-			$('#wrap .control').toggle(300);
-		}
-	)
 	
 	$('.home').click(function(){
 		window.open('http://viztor.me');
