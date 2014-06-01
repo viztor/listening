@@ -65,34 +65,29 @@ $(document).ready(function(){
 		currentMusic = localStorage.currentMusic = i;
 		var item = playlist[i];
 
-				//ѡ����ͬ�����������ļ�
-					src = 'res/'+ item + '.mp3' ;
-        console.log(src)
-				//���ظ��ֶ���
-				audio.setAttribute("src", src);
-				audio.addEventListener('play', playEvent, false);
-				audio.addEventListener('pause', stopEvent, false);
-				audio.addEventListener('timeupdate', updateProgress, false);
-				audio.addEventListener('ended', autoChange, false);
-					cover = 'img/album.jpg';
-				$('.album img').attr({'src': cover, 'alt': '英语听力'});
-				$('#wrap .title h1').html(item);
-				$('#wrap .title h2').html('英语听力');
-				$('.play-list ul li').removeClass('playing').eq(i).addClass('playing');
-				
-				audio.play();
-
-				if(window.webkitNotifications && window.webkitNotifications.checkPermission() == 0){
-					var information = window.webkitNotifications.createNotification(cover, item, "英语听力");
-					information.onclick = function(){
-						window.focus();
-						information.cancel();
-					}
-					information.show(); 
-					setTimeout(function(){information.cancel()},2000);
-				}
-				console.log('Current Playing: ' + item);
-
+        src = 'res/'+ item + '.mp3' ;
+        audio.setAttribute("src", src);
+        audio.addEventListener('play', playEvent, false);
+        audio.addEventListener('pause', stopEvent, false);
+        audio.addEventListener('timeupdate', updateProgress, false);
+        audio.addEventListener('ended', autoChange, false);
+        cover = 'img/album.jpg';
+        $('.album img').attr({'src': cover, 'alt': '英语听力'});
+        $('#wrap .title h1').html(item);
+        $('#wrap .title h2').html('英语听力');
+        $('.play-list ul li').removeClass('playing').eq(i).addClass('playing');
+        audio.play();
+        
+        if(window.webkitNotifications && window.webkitNotifications.checkPermission() == 0){
+            var information = window.webkitNotifications.createNotification(cover, item, "英语听力");
+            information.onclick = function(){
+                window.focus();
+                information.cancel();
+            }
+            information.show(); 
+            setTimeout(function(){information.cancel()},2000);
+        }
+        console.log('Current Listening: ' + item);
 	}
 	loadMusic(currentMusic);
 	
@@ -102,11 +97,11 @@ $(document).ready(function(){
 	}
 
 	var randomNum = function(min,max){
-		var radx = Math.floor(min + Math.random() * (max - min));
-		if(radx != localStorage.currentMusic)
-			return radx;
-		else
-			return Math.floor(min + Math.random() * (max - min));
+		var radx;
+		while( !radx || radx == localStorage.currentMusic ){
+            radx = Math.floor(min + Math.random() * (max - min));
+        }
+        return radx;
 	}
 
 	/*'fa-random', 'fa-refresh', 'fa-retweet'*/
