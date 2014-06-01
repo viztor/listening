@@ -24,11 +24,11 @@ strong { font-weight: bold; }
 table { border-collapse: collapse; border-spacing: 0; }  
 img { border: 0; max-width: 100%; } 
 
-::-webkit-scrollbar{ background: #666; }
+::-webkit-scrollbar{ background: #888; }
 ::-webkit-scrollbar-track-piece{ background: #666; }
 ::-webkit-scrollbar{ width: 10px ;height: 14px }
 ::-webkit-scrollbar-thumb{ height: 80px; background-color: #333; }
-::-webkit-scrollbar-thumb:hover{ background-color: #111; }
+::-webkit-scrollbar-thumb:hover{ background-color: #000; }
 
 /*-----------------[ MAIN ]------------------------*/
 
@@ -51,9 +51,6 @@ body:hover #wrap .play-list, body:hover #wrap .control, body:hover #wrap .inicie
 	z-index: 999;
 	display: none;
 }
-#wrap .control div {
-	
-}
 #wrap .iniciel {
 	position: fixed;
 	margin: 5% 0 0 20px;
@@ -65,13 +62,6 @@ body:hover #wrap .play-list, body:hover #wrap .control, body:hover #wrap .inicie
 	-o-transition: linear opacity .3s;
 }
 
-#wrap .control {
-	opacity: 0;
-	transition: linear opacity .3s;
-	-webkit-transition: linear opacity .3s;
-	-moz-transition: linear opacity .3s;
-	-o-transition: linear opacity .3s;
-}
 
 #wrap .control i,#wrap .iniciel i {
 	background: rgba(0,0,0,0.2);
@@ -127,37 +117,40 @@ body:hover #wrap .play-list, body:hover #wrap .control, body:hover #wrap .inicie
 	max-width: 300px;
 	top: 0px;
 	right: 0px;
-	z-index: 99999 !important;
+	z-index: 9999 !important;
 	background: rgb(220,220,220);
-	box-shadow: -2px 0px 10px 2px rgba(0, 0, 0, 0.1);
+	box-shadow:inset -2px 0px 10px 2px rgba(0, 0, 0, 0.1);
 	overflow: auto;
+}
+#wrap .list-buttom {
+    z-index: 9999 !important
 }
 #wrap .play-list ul li {
 	max-width: 300px;
 	overflow: hidden;
-	padding: 15px;
+	padding: 20px;
 	transition: all .4s linear;
 }
-#wrap .play-list ul .playing { color: #fff; font-weight: 800; }
+#wrap .play-list ul .playing { color: #666; font-weight: 800; background: rgb(245,245,245)}
 #wrap .play-list ul .playing:before { content: '[ ' }
 #wrap .play-list ul .playing:after { content: ' ]' }
 #wrap .play-list ul li:hover {
-	background: rgba(0,0,0,0.8);
-	color: rgba(255,255,255,1);
+	background: #BBB;
+	color: #EEE;
 	cursor: pointer;
 }
-#wrap .play-list .list-button {
-	padding: 10px 15px;	
+#wrap .list-button {
+	padding: 15px 15px;	
 	margin: 10px 10px;
-	margin-right: -5px;
-	background: rgba(0,0,0,0.2);
-	color: rgba(255,255,255,0.6);
-	font-size: 2em;
-	border-radius: 5px;
+	margin-right: 10px;
+	background: rgb(50,50,50);
+	color: rgb(150,150,150);
+	font-size: 1.5em;
+	border-radius: 3px;
 }
 #wrap .play-list .list-button:hover {
-	background: rgba(0,0,0,0.6);
-	color: rgba(255,255,255,0.8);
+	background: rgba(120,120,120);
+	color: rgba(200,200,200,0.8);
 	cursor: pointer;
 }
 @media screen and (max-width: 768px) {
@@ -207,7 +200,9 @@ to{transform: rotate(359deg)}
 	width: 250px;
 	height: 250px;
 	border-radius: 50%;
-	border: 1px solid #999;
+	border: 1px solid #AAA;
+    box-shadow:0 0 15px 0px rgba(0, 0, 0, 0.7);
+    
 }
 @media screen and (max-width: 992px) { 
   #wrap .album img{

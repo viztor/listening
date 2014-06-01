@@ -4,12 +4,12 @@ $(document).ready(function(){
 	$('.list-button').click(function(){
 		listWidth = $('#wrap .play-list ul').width();
 		if(!listStatus){
-			$(this).animate({marginRight: listWidth - 5},300);
-			$('#wrap .play-list ul').animate({marginRight: 0},300);
+            $('#wrap .play-list ul').animate({marginRight: 0},200);
+			$(this).animate({marginRight: listWidth - 5},500);
 			listStatus = 1;
 		} else {
+            $('#wrap .play-list ul').animate({marginRight: -400},500);
 			$(this).animate({marginRight: -5},300);
-			$('#wrap .play-list ul').animate({marginRight: -400},300);
 			listStatus = 0;
 		}	
 	})
@@ -35,12 +35,8 @@ $(document).ready(function(){
 	var retitle = ['Random', 'Cycle', 'Order'];
 
 	//����״̬�޸�ͼ��
-	if(!quality){
-		$('.control .quality i').removeClass('fa-star').addClass('fa-star-half').attr('title','Normal Quality'); 
-	} else {
-		$('.control .quality i').removeClass('fa-star-half').addClass('fa-star').attr('title','High Quality'); 
-	}
-	$('.control .repeat i').removeClass().addClass('fa').addClass(relist[repeat]).attr('title',retitle[repeat]); 
+
+	$('.repeat i').removeClass().addClass('fa').addClass(relist[repeat]).attr('title',retitle[repeat]); 
 
 	console.log('Current Music: ' + currentMusic + ' Repeat: '+ repeat + ' Quality: '+ quality);
 
@@ -154,7 +150,7 @@ $(document).ready(function(){
 		}
 	});
 
-	$('.control .pre').click(function(){
+	$('.pre').click(function(){
 		audio.pause();
 		if((currentMusic * 1 + 1) != localStorage.prevplay && localStorage.prevplay > -1){
 			changeMusic(localStorage.prevplay);
@@ -165,7 +161,7 @@ $(document).ready(function(){
 		}
 	})
 
-	$('.control .next').click(function(){
+	$('.next').click(function(){
 		audio.pause();
 		if(localStorage.repeat == 0){
 			nextMusic = randomNum(0, playlist.length); 
@@ -189,26 +185,17 @@ $(document).ready(function(){
 		}
 	})
 
-	$('.control .repeat').click(function(){
+	$('.repeat').click(function(){
 		console.log('repeat ' + repeat);
 		if(repeat == 2){
-			$('.control .repeat i').removeClass(relist[repeat]).addClass(relist[0]).attr('title',retitle[0]); 
+			$('.repeat i').removeClass(relist[repeat]).addClass(relist[0]).attr('title',retitle[0]); 
 			repeat = localStorage.repeat = 0;
 		} else {
-			$('.control .repeat i').removeClass(relist[repeat]).addClass(relist[repeat + 1]).attr('title',retitle[repeat + 1]); 
+			$('.repeat i').removeClass(relist[repeat]).addClass(relist[repeat + 1]).attr('title',retitle[repeat + 1]); 
 			repeat = localStorage.repeat = repeat + 1;
 		}	
 	})
 	
-	$('.control .quality').click(function(){
-		if(quality){
-			$('.control .quality i').removeClass('fa-star').addClass('fa-star-half').attr('title','Normal Quality'); 
-			quality = localStorage.quality = 0;
-		} else {
-			$('.control .quality i').removeClass('fa-star-half').addClass('fa-star').attr('title','High Quality'); 
-			quality = localStorage.quality = 1;
-		}	
-	})
 	
 	$('.player').click(function(){
 		if(listStatus){
@@ -218,21 +205,6 @@ $(document).ready(function(){
 		}
 	})
 	
-	$('.setting').click(function(){
-		
-	})
-	
-	$('.iniciel_control').click(function(){
-			if($('.iniciel_control i').hasClass('fa-plus')){
-				$('.iniciel_control i').removeClass('fa-plus');
-				$('.iniciel_control i').addClass('fa-minus');
-			} else {
-				$('.iniciel_control i').removeClass('fa-minus');
-				$('.iniciel_control i').addClass('fa-plus');
-			}
-			$('#wrap .control').toggle(300);
-		}
-	)
 	
 	$('.home').click(function(){
 		window.open('http://viztor.me');
