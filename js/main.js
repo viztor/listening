@@ -13,19 +13,11 @@ $(document).ready(function(){
 			listStatus = 0;
 		}	
 	})
-    console.log(playlist)
 	//console.log(localStorage.currentMusic + '-' + localStorage.repeat + '-' + localStorage.quality);
 	//���ر������ݣ������еĻ���
-	if(typeof(localStorage.repeat) == undefined || isNaN(localStorage.repeat))
-		localStorage.repeat = '0';
-	if(typeof(localStorage.quality) == undefined || isNaN(localStorage.quality))
-		localStorage.quality = '0';
-	if(typeof(localStorage.prevplay) == undefined || isNaN(localStorage.prevplay))
-		localStorage.prevplay = '-1';
-	if(typeof(localStorage.prevplay) == currentMusic || isNaN(localStorage.currentMusic) || !playlist[localStorage.currentMusic])
-		localStorage.currentMusic = '0';
 	//localStorage.currentMusic = 0;
-	//������Ҫ�õ��ı���
+
+	//������Ҫõ��ı���
 	var audio = document.getElementById('music');
 	var isPlaying    = false;
 	var currentMusic = localStorage.currentMusic;
@@ -38,12 +30,11 @@ $(document).ready(function(){
 
 	$('.repeat i').removeClass().addClass('fa').addClass(relist[repeat]).attr('title',retitle[repeat]); 
 
-	console.log('Current Music: ' + currentMusic + ' Repeat: '+ repeat + ' Quality: '+ quality);
+	console.log('Current Music: ' + currentMusic + ' Repeat: '+ repeat );
 
 	//���ز����б�
 	for (var i = 0; i < playlist.length; i++){
-		var item = playlist[i];
-		$('.play-list ul').append('<li class="item' + i + '">' + item + '</li>');
+		$('.play-list ul').append('<li class="item' + i + '">' + playlist[i] + '</li>');
 	}    
 	
 	/**
@@ -85,8 +76,8 @@ $(document).ready(function(){
         }
         console.log('Current Listening: ' + item);
 	}
-	loadMusic(currentMusic);
 	
+    
 	var changeMusic = function(i){
 		loadMusic(i);
 		audio.play();
@@ -119,7 +110,8 @@ $(document).ready(function(){
 				break;
 		}
 	}
-
+    
+    
 	var updateProgress = function(){
 		$('#wrap .progress .current').css({'width': audio.currentTime / audio.duration * 100 + '%'});
 	}
@@ -209,4 +201,11 @@ $(document).ready(function(){
 	$('.home').click(function(){
 		window.open('http://viztor.me');
 	})
+    
+    if(typeof(localStorage.repeat) == undefined || isNaN(localStorage.repeat))
+		localStorage.repeat = '0';
+	if(typeof(localStorage.prevplay) == undefined || isNaN(localStorage.prevplay))
+		localStorage.prevplay = '-1';
+	if(typeof(localStorage.prevplay) == currentMusic || isNaN(localStorage.currentMusic) || !playlist[localStorage.currentMusic])
+		autoChange(); else changeMusic(localStorage.currentMusic * 1);
 })
