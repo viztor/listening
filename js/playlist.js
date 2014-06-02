@@ -13,4 +13,3 @@ for (i in playlistType) {
     playlist.push(playlistItem);
     }
 }
-console.log(playlist)

@@ -58,7 +58,7 @@ $(document).ready(function(){
         audio.addEventListener('pause', stopEvent, false);
         audio.addEventListener('timeupdate', updateProgress, false);
         audio.addEventListener('ended', autoChange, false);
-        cover = 'img/album.jpg';
+        cover = 'http://pic3.zhimg.com/f5f8def39cecd0c1fc540dfef6554abe_b.jpg';
         $('.album img').attr({'src': cover, 'alt': '英语听力'});
         $('#wrap .title h1').html(item);
         $('#wrap .title h2').html('英语听力');
