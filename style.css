@@ -129,7 +129,7 @@ body:hover #wrap .play-list, body:hover #wrap .control, body:hover #wrap .inicie
 	max-width: 300px;
 	overflow: hidden;
 	padding: 20px;
-	transition: all .4s linear;
+	transition: all .2s linear;
 }
 #wrap .play-list ul .playing { color: #666; font-weight: 800; background: rgb(245,245,245)}
 #wrap .play-list ul .playing:before { content: '[ ' }
@@ -140,8 +140,10 @@ body:hover #wrap .play-list, body:hover #wrap .control, body:hover #wrap .inicie
 	cursor: pointer;
 }
 #wrap .list-button {
+	position: relative;
+	bottom: 50%;
+	top:80%;
 	padding: 15px 15px;	
-	margin: 10px 10px;
 	margin-right: 10px;
 	background: rgb(50,50,50);
 	color: rgb(150,150,150);
@@ -270,7 +272,7 @@ to{transform: rotate(359deg)}
 	color: #222;
 }
 #wrap .title h1{
-	font-size: 18px;
+	font-size: 1.6em;
 }
 #wrap .title h1:before {
 	content: '「';
@@ -280,7 +282,7 @@ to{transform: rotate(359deg)}
 }
 #wrap .title h2 {
 	margin-top: 10px;
-	font-size: 14px;
+	font-size: 1.4em;
 }
 @media screen and (max-width: 768px) {
 	#wrap .title h1 { font-size: 3em; }
