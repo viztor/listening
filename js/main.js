@@ -1,6 +1,6 @@
 $(document).ready(function(){
 	//�򿪹رղ����б�
-	listStatus = 0;
+			listStatus = 0;
 	$('.list-button').click(function(){
 		listWidth = $('#wrap .play-list ul').width();
 		if(!listStatus){
@@ -20,7 +20,7 @@ $(document).ready(function(){
 	//������Ҫõ��ı���
 	var audio = document.getElementById('music');
 	var isPlaying    = false;
-	var currentMusic = localStorage.currentMusic;
+	var currentMusic = localStorage.currentMusic || 0;
 	var repeat = parseInt(localStorage.repeat);
 	var quality = 0;
 	var relist = ['fa-random', 'fa-refresh', 'fa-retweet'];
@@ -201,7 +201,7 @@ $(document).ready(function(){
 	$('.home').click(function(){
 		window.open('http://viztor.me');
 	})
-    
+
     if(typeof(localStorage.repeat) == undefined || isNaN(localStorage.repeat))
 		localStorage.repeat = '0';
 	if(typeof(localStorage.prevplay) == undefined || isNaN(localStorage.prevplay))
